@@ -3,8 +3,8 @@ import { Aside } from '@/components/Aside'
 import './globals.css'
 
 export const metadata = {
-  title: 'Code Connect',
-  description: 'Uma rede social para devs',
+  title: 'Blog Next',
+  description: 'Blog Next',
 }
 
 const prompt = Prompt({
