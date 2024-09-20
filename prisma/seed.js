@@ -140,8 +140,8 @@ async function main() {
     },
   ]
 
-  posts.forEach(async (post) => {
-    await prisma.post.upsert({
+  posts.forEach((post) => {
+    prisma.post.upsert({
       where: { slug: post.slug },
       update: {},
       create: post,
