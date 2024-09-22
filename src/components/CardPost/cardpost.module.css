@@ -2,7 +2,6 @@
   width: 486px;
   border-radius: 8px;
   background: #171d1f;
-  color: #fff;
 }
 
 .header {
@@ -13,6 +12,7 @@
 
 .header figure {
   margin: 0;
+  position: relative;
 }
 
 .body {
@@ -51,6 +51,10 @@
   color: #888;
   font-size: 15px;
   text-align: center;
+}
+
+.actions {
+  display: flex;
 }
 
 .link {

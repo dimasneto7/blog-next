@@ -1,23 +1,24 @@
-import { incrementThumbsUp } from '@/actions'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Avatar } from '../Avatar'
-import { ModalComment } from '../ModalComment'
 import styles from './cardpost.module.css'
-import { ThumbsUpButton } from './ThumbsUpButton'
+import Link from 'next/link'
 
-export const CardPost = ({ post }) => {
+import { incrementThumbsUp, postComment } from '@/actions'
+import { ThumbsUpButton } from './ThumbsUpButton'
+import { ModalComment } from '../ModalComment'
+
+export const CardPost = ({ post, highlight }) => {
   const submitThumbsUp = incrementThumbsUp.bind(null, post)
+  const submitComment = postComment.bind(null, post)
 
   return (
-    <article className={styles.card}>
+    <article className={styles.card} style={{ width: highlight ? 993 : 486 }}>
       <header className={styles.header}>
-        <figure>
+        <figure style={{ height: highlight ? 300 : 133 }}>
           <Image
             src={post.cover}
-            width={438}
-            height={133}
-            alt={`Capa do post de título: ${post.title}`}
+            fill
+            alt={`Capa do post de titulo: ${post.title}`}
           />
         </figure>
       </header>
@@ -27,14 +28,14 @@ export const CardPost = ({ post }) => {
         <Link href={`/posts/${post.slug}`}>Ver detalhes</Link>
       </section>
       <footer className={styles.footer}>
-        <div>
+        <div className={styles.actions}>
           <form action={submitThumbsUp}>
             <ThumbsUpButton />
             <p>{post.likes}</p>
           </form>
           <div>
-            <ModalComment />
-            <p>{post.comments?.length}</p>
+            <ModalComment action={submitComment} />
+            <p>{post.comments.length}</p>
           </div>
         </div>
         <Avatar imageSrc={post.author.avatar} name={post.author.username} />
