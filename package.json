@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "prisma generate && prisma migrate dev && prisma db seed && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate",
+    "prisma:seed": "prisma db seed"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
@@ -14,6 +17,7 @@
   "dependencies": {
     "@prisma/client": "^5.9.1",
     "next": "14.2.11",
+    "next-auth": "^4.24.7",
     "prisma": "^5.9.1",
     "react": "^18",
     "react-dom": "^18",
