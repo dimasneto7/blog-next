@@ -1,5 +1,7 @@
 'use server'
 
+import { options } from '@/app/api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth'
 import { revalidatePath } from 'next/cache'
 import db from '../../prisma/db'
 
@@ -20,16 +22,18 @@ export async function incrementThumbsUp(post) {
 }
 
 export async function postComment(post, formData) {
-  const author = await db.user.findFirst({
-    where: {
-      username: 'anabeatriz_dev',
-    },
-  })
+  // const author = await db.user.findFirst({
+  //   where: {
+  //     username: 'anabeatriz_dev',
+  //   },
+  // })
+
+  const session = await getServerSession(options)
 
   await db.comment.create({
     data: {
       text: formData.get('text'),
-      authorId: author.id,
+      authorId: session.user.id,
       postId: post.id,
     },
   })
@@ -39,11 +43,13 @@ export async function postComment(post, formData) {
 }
 
 export async function postReply(parent, formData) {
-  const author = await db.user.findFirst({
-    where: {
-      username: 'anabeatriz_dev',
-    },
-  })
+  // const author = await db.user.findFirst({
+  //   where: {
+  //     username: 'anabeatriz_dev',
+  //   },
+  // })
+
+  const session = await getServerSession(options)
 
   const post = await db.post.findFirst({
     where: {
@@ -54,7 +60,7 @@ export async function postReply(parent, formData) {
   await db.comment.create({
     data: {
       text: formData.get('text'),
-      authorId: author.id,
+      authorId: session.user.id,
       postId: post.id,
       parentId: parent.parentId ?? parent.id,
     },
