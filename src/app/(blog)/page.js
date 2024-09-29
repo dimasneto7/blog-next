@@ -1,7 +1,7 @@
 import { CardPost } from '@/components/CardPost'
 import logger from '@/logger'
 import Link from 'next/link'
-import db from '../../prisma/db'
+import db from '../../../prisma/db'
 import styles from './page.module.css'
 
 async function getAllPosts(page, searchTerm) {
