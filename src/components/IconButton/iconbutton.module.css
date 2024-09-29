@@ -3,3 +3,8 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.btn:disabled {
+  cursor: not-allwed;
+  opacity: 0.7;
+}
